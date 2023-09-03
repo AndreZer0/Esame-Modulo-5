@@ -11,12 +11,12 @@ class LatestRelease extends Component{
         return(
             <Card className="card" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={this.props.img} />
-            <Card.Body>
+            <Card.Body className="corpo">
               <Card.Title>{this.props.title}</Card.Title>
-              <Card.Text>
+              <Card.Text className="testo">
                 {this.props.category}
               </Card.Text>
-              <Button variant="primary">{this.props.btn}</Button>
+              <Button  className="bottone" variant="primary">{this.props.btn}</Button>
             </Card.Body>
           </Card>
         )

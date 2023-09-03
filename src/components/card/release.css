@@ -6,5 +6,14 @@
 .card img{
     height: 26em;
 }
+ 
+.corpo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+   
+}
 
-
+.corpo button{
+    width: 7em;
+}
