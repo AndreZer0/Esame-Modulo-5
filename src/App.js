@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import MyNav from "./components/navbar/MyNav";
 import Footer from "./components/footer/Footer";
-import Main from "./components/main/Main"
+import LatestRelease from "./components/main/LatestRelease";
 import Welcome from "./components/jumbotron/Welcome";
+
 
 class App extends Component{
   render(){
@@ -10,8 +11,10 @@ class App extends Component{
 <>
 <MyNav />
 <Welcome />
-<Main />
+
+<LatestRelease />
 <Footer />
+
     
     </>
 )
