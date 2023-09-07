@@ -6,7 +6,7 @@ import { nanoid } from "nanoid";
 
 import SingleBook from "../card/SingleBook";
 
-class Main extends Component {
+class LatestRelease extends Component {
   constructor(props) {
     super(props);
 
@@ -52,4 +52,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default LatestRelease;
