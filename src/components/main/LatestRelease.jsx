@@ -1,55 +1,35 @@
-import React, { Component } from "react";
-import Container from "react-bootstrap/Container";
-import { Col, Row } from "react-bootstrap";
-import horrorBooks from "../../booksdata/horror.json";
-import { nanoid } from "nanoid";
+/** @format */
 
-import SingleBook from "../card/SingleBook";
+import React, { useState, useContext } from 'react';
+import Container from 'react-bootstrap/Container';
+import { Col, Row, Form, Button } from 'react-bootstrap';
 
-class LatestRelease extends Component {
-  constructor(props) {
-    super(props);
+import { nanoid } from 'nanoid';
+import SingleBook from '../card/SingleBook';
+import './release.css';
+import { PostProvider } from '../../context/Context';
 
-    this.state = {
-      searchText: "",
-    };
-  }
+const LatestRelease = () => {
+  const { filteredBooks, setFilteredBooks } = useContext(PostProvider);
 
-  handleChange = e => {
-    this.setState({ searchText: e.target.value });
-  };
-  render() {
-    const filteredBooks = horrorBooks.filter(book =>
-      book.title.toLowerCase().includes(this.state.searchText.toLowerCase())
-    );
-
-    return (
-      <Container>
-        <input
-          type="text"
-          placeholder="Cerca parola chiave"
-          value={this.state.searchText}
-          className="form-control my-3"
-          onChange={this.handleChange}
-        />
-        <Row>
-          <Col className="d-flex flex-wrap gap-4">
-            {filteredBooks.map(book => (
-              <SingleBook
-                img={book.img}
-                title={book.title}
-                category={book.category}
-                price={book.price}
-                btn="Aquista"
-                key={nanoid()}
-                book={book}
-              />
-            ))}
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <Row>
+        <Col className='d-flex flex-wrap gap-5'>
+          {filteredBooks.map(book => (
+            <SingleBook
+              key={nanoid()}
+              asin={book.asin}
+              img={book.img}
+              title={book.title}
+              category={book.category}
+              price={book.price}
+            />
+          ))}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default LatestRelease;

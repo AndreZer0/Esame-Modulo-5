@@ -1,6 +1,48 @@
-.jumbotron{
-    background-color:rgb(25,135,83);
-    border: 20px solid white;
-    color: white;
-    font-family:italic small-caps bold cursive;
+/** @format */
+
+.jumbotron {
+  background-color: rgb(25, 135, 83);
+  margin: 2em;
+  padding: 5em;
+  font-family: italic small-caps bold cursive;
+  color: white;
+  background-image: url('https://media.istockphoto.com/id/615118754/vector/horizontal-seamless-background-with-forest.jpg?s=170667a&w=0&k=20&c=IVfrVD2GkpPUfyDwEEXH41zcSsXS7lOCSywLEf32YPc=');
+}
+
+.epic {
+  position: relative;
+  display: block;
+
+  text-align: center;
+  line-height: 63px;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+.epic:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: #fefefe;
+  transition: 0.5s;
+  transform: scale(0.9);
+  z-index: -1;
+}
+.epic:hover::before {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ffffff;
+}
+
+.epic:hover {
+  color: #ffffff;
+
+  text-shadow: 0 0 5px #5df942;
+}
+
+.lead {
+  text-align: center;
 }

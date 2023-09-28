@@ -1,0 +1,16 @@
+/** @format */
+.cestino {
+  font-size: 1.2em;
+  margin: 0.5em;
+}
+
+.corpo ul {
+  border: 2px solid green;
+  border-radius: 5px;
+  margin: 1em;
+  padding: 1em;
+}
+
+.corpo ul li {
+  padding-bottom: 2em;
+}

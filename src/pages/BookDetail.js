@@ -3,13 +3,9 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import CommentArea from '../comments/CommentArea';
-import comments from '../comments/CommentArea';
-import { Link } from 'react-router-dom';
-
-import './single.css';
-
-const SingleBook = ({ category, price, title, img, btn, asin }) => {
+import CommentArea from '../components/comments/CommentArea';
+import './bookdet.css';
+const BookDetail = ({ category, price, title, img, btn, asin }) => {
   const [selected, setSelected] = useState(false);
   // console.log(book.asin);
 
@@ -20,7 +16,7 @@ const SingleBook = ({ category, price, title, img, btn, asin }) => {
 
   return (
     <Card
-      className='card'
+      className='card mx-4 mt-2'
       style={{ width: '18rem' }}>
       <Card.Img
         className={`${selected ? 'Border' : ''}`}
@@ -32,14 +28,12 @@ const SingleBook = ({ category, price, title, img, btn, asin }) => {
         <Card.Title>{title}</Card.Title>
         <Card.Text className='testo'>{category}</Card.Text>
         <Card.Text className='testo'>{price}€</Card.Text>
+        <Card.Text className='asin'>{asin}</Card.Text>
 
         <Button
           className='bottone'
           variant='success'>
           Acquista
-        </Button>
-        <Button variant='info'>
-          <Link to={`/bookdetail/${asin}`}>Dettagli</Link>
         </Button>
       </Card.Body>
       <Card.Body className='modale'>
@@ -49,4 +43,4 @@ const SingleBook = ({ category, price, title, img, btn, asin }) => {
   );
 };
 
-export default SingleBook;
+export default BookDetail;

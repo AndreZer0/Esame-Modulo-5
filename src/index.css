@@ -1,0 +1,13 @@
+/** @format */
+
+#root {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background: rgb(10, 167, 85);
+  background: radial-gradient(
+    circle,
+    rgba(10, 167, 85, 1) 6%,
+    rgba(16, 255, 0, 0.1503195028011205) 100%
+  );
+}

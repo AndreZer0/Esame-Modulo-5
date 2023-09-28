@@ -1,24 +1,35 @@
-import React, { Component } from "react";
-import MyNav from "./components/navbar/MyNav";
-import Footer from "./components/footer/Footer";
-import LatestRelease from "./components/main/LatestRelease";
-import Welcome from "./components/jumbotron/Welcome";
+/** @format */
 
+import React from 'react';
 
-class App extends Component{
-  render(){
-    return(
-<>
-<MyNav />
-<Welcome />
+import Context from './context/Context';
+import { BrowserRouter, Routes, Route, Switch, Link } from 'react-router-dom';
 
-<LatestRelease />
-<Footer />
+import Home from './pages/Home';
+import BookDetails from './pages/BookDetails';
+import Error from './pages/Error';
 
-    
-    </>
-)
-  }
-}
+const App = () => {
+  return (
+    <Context>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            exact
+            path='/'
+            element={<Home />}
+          />
+          <Route
+            path='/bookdetail/:bookasin'
+            element={<BookDetails />}
+          />
+          <Route
+            path='*'
+            element={<Error />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Context>
+  );
+};
 
 export default App;
