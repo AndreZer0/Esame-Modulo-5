@@ -27,6 +27,12 @@ const BookDetail = ({ category, price, title, img, btn, asin }) => {
 
       <Card.Body className='corpo'>
         <Card.Title>{title}</Card.Title>
+        <Card.Text className='testo'>
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </Card.Text>
         <Card.Text className='testo'>{category}</Card.Text>
         <Card.Text className='testo'>{price}€</Card.Text>
         <Card.Text className='asin'>{asin}</Card.Text>
