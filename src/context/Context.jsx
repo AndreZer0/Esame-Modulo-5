@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import horror from '../booksdata/horror.json';
 
 export const PostProvider = createContext();

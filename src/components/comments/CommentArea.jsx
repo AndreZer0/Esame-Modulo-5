@@ -1,12 +1,13 @@
 /** @format */
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Form } from 'react-bootstrap';
 import './comment.css';
 import { Trash } from 'react-bootstrap-icons';
+import { Pencil } from 'react-bootstrap-icons';
 
 const CommentArea = ({ book, bookId }) => {
   const [comments, setComments] = useState([]);
@@ -26,6 +27,10 @@ const CommentArea = ({ book, bookId }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editedCommentText, setEditedCommentText] = useState('');
+  const [editedRate, setEditedRate] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   console.log(comments);
   const Url = `https://striveschool-api.herokuapp.com/api/comments/`;
@@ -108,6 +113,60 @@ const CommentArea = ({ book, bookId }) => {
     }
   };
 
+  const putComments = async (commentId, updatedComment) => {
+    try {
+      const response = await fetch(`${Url}${commentId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyZThmMTBjNThjZTAwMTRlNmFjOTYiLCJpYXQiOjE2OTU3MzgwOTgsImV4cCI6MTY5Njk0NzY5OH0.lMKKZWsFjByxSZEaKpmxkwTkMaaXJLoKqywrukD1aH0',
+        },
+        body: JSON.stringify(updatedComment),
+      });
+
+      if (response.ok) {
+        const updatedComments = comments.map(comment =>
+          comment._id === commentId
+            ? {
+                ...comment,
+                comment: updatedComment.comment,
+                rate: updatedComment.rate,
+              }
+            : comment
+        );
+        setComments(updatedComments);
+        setEditingCommentId(null);
+      } else {
+        console.error('Errore, non riesco ad modificare il commento');
+      }
+    } catch (error) {
+      console.error('Impossibile modificare i commenti', error);
+    }
+  };
+  const saveEditedComment = async commentId => {
+    if (isEditing) {
+      const updatedComment = {
+        comment: editedCommentText,
+        rate: editedRate,
+      };
+      await putComments(commentId, updatedComment);
+    } else {
+      cancelEditingComment();
+    }
+  };
+  const startEditingComment = (commentId, commentText) => {
+    setEditingCommentId(commentId);
+    setEditedCommentText(commentText);
+
+    setIsEditing(true);
+  };
+
+  const cancelEditingComment = () => {
+    setIsEditing(false);
+    setEditingCommentId(null);
+    setEditedCommentText('');
+  };
   useEffect(() => {
     getResponse();
   }, [refresh]);
@@ -122,28 +181,75 @@ const CommentArea = ({ book, bookId }) => {
 
       <Modal
         show={show}
-        onHide={handleClose}>
+        onHide={handleClose}
+        className='mr-0'>
         <Modal.Header closeButton>
           <Modal.Title>Commenti</Modal.Title>
         </Modal.Header>
         <Modal.Body className='corpo'>
           <ul>
             {comments.map(comment => (
-              <li>
+              <li key={comment._id}>
                 <p>{comment.author}</p>
-                <p>{comment.comment}</p>
-                <p>{comment.rate}/5</p>
-                <Button
-                  className='mb-4'
-                  variant='danger'
-                  onClick={() => deleteComments(comment._id)}>
-                  ELIMINA COMMENTO
-                  <Trash
-                    className='cestino'
-                    color='black'
-                    style={{ cursor: 'pointer' }}
-                  />
-                </Button>
+                {editingCommentId === comment._id ? (
+                  <>
+                    <Form.Control
+                      as='textarea'
+                      rows={3}
+                      value={editedCommentText}
+                      onChange={e => setEditedCommentText(e.target.value)}
+                    />
+                    <Form.Group className='mb-3'>
+                      <Form.Label>Nuovo voto</Form.Label>
+                      <Form.Control
+                        min={1}
+                        max={5}
+                        value={editedRate}
+                        onChange={e => setEditedRate(e.target.value)}
+                        name='editedRate'
+                        type='number'
+                      />
+                    </Form.Group>
+                    <Button
+                      variant='primary'
+                      onClick={() => saveEditedComment(comment._id)}>
+                      Salva
+                    </Button>
+                    <Button
+                      variant='secondary'
+                      onClick={() => cancelEditingComment()}>
+                      Annulla
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <p>{comment.comment}</p>
+                    <p>Voto: {comment.rate}/5</p>{' '}
+                    <Button
+                      className='mb-4'
+                      variant='primary'
+                      onClick={() =>
+                        startEditingComment(comment._id, comment.comment)
+                      }>
+                      MODIFICA
+                      <Pencil
+                        className='modified'
+                        variant='light'
+                      />
+                    </Button>
+                    <Button
+                      className='mb-4'
+                      variant='danger'
+                      onClick={() => deleteComments(comment._id)}>
+                      ELIMINA
+                      <Trash
+                        className='cestino'
+                        color='black'
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </Button>
+                  </>
+                )}
               </li>
             ))}
           </ul>

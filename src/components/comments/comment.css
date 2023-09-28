@@ -14,3 +14,18 @@
 .corpo ul li {
   padding-bottom: 2em;
 }
+
+.modified {
+  font-size: 1.2em;
+  margin: 0.5em;
+}
+
+.mb-4 {
+  margin: 0.5em;
+  border-radius: 15px;
+}
+
+.modal-dialog {
+  margin-top: 1%;
+  margin-left: 60%;
+}

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CommentArea from '../comments/CommentArea';
-import comments from '../comments/CommentArea';
+
 import { Link } from 'react-router-dom';
 
 import './single.css';
@@ -34,11 +34,11 @@ const SingleBook = ({ category, price, title, img, btn, asin }) => {
         <Card.Text className='testo'>{price}€</Card.Text>
 
         <Button
-          className='bottone'
+          className='bottone mb-2'
           variant='success'>
           Acquista
         </Button>
-        <Button variant='info'>
+        <Button variant='warning'>
           <Link to={`/bookdetail/${asin}`}>Dettagli</Link>
         </Button>
       </Card.Body>

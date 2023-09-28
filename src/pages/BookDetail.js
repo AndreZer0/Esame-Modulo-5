@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CommentArea from '../components/comments/CommentArea';
-import './bookdet.css';
+
 const BookDetail = ({ category, price, title, img, btn, asin }) => {
   const [selected, setSelected] = useState(false);
   // console.log(book.asin);
@@ -24,6 +24,7 @@ const BookDetail = ({ category, price, title, img, btn, asin }) => {
         variant='top'
         src={img}
       />
+
       <Card.Body className='corpo'>
         <Card.Title>{title}</Card.Title>
         <Card.Text className='testo'>{category}</Card.Text>
@@ -32,7 +33,7 @@ const BookDetail = ({ category, price, title, img, btn, asin }) => {
 
         <Button
           className='bottone'
-          variant='success'>
+          variant='success mb-2'>
           Acquista
         </Button>
       </Card.Body>

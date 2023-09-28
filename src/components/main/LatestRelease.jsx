@@ -1,12 +1,12 @@
 /** @format */
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import { Col, Row, Form, Button } from 'react-bootstrap';
 
 import { nanoid } from 'nanoid';
 import SingleBook from '../card/SingleBook';
-import './release.css';
+
 import { PostProvider } from '../../context/Context';
 
 const LatestRelease = () => {
@@ -15,7 +15,7 @@ const LatestRelease = () => {
   return (
     <Container>
       <Row>
-        <Col className='d-flex flex-wrap gap-5'>
+        <Col className='d-flex flex-wrap gap-5 col-6'>
           {filteredBooks.map(book => (
             <SingleBook
               key={nanoid()}
